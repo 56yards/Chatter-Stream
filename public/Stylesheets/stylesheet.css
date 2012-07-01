@@ -1,0 +1,144 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-size: 62.5%;
+	color: #444;
+	font-family: arial;	
+	background: transparent url(../Images/background.png) repeat left top;
+}
+
+.clear { clear: both; }
+
+a {
+	margin: 1px 0 0 20px;
+	padding: 7px 20px;
+	color: #fff;
+	text-decoration: none;
+	font-size: 1.8em;
+	font-weight: normal;
+	letter-spacing: 2px;
+    text-shadow: 0 1px 0 #529122;
+  
+	border: 1px solid #65AB30;
+    	
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+		
+	background-image: -moz-linear-gradient(#80BF4F, #63A72F);
+	box-shadow: 0 1px 0 0 #9BCB76 inset;    
+}
+
+a:hover {
+	background-image: -moz-linear-gradient(#80BF4F, #579328);
+}
+
+label {
+	padding-right: 5px;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+input { 
+	margin-top: 20px;
+	padding: 10px 5px;
+	border: 1px solid #ddd;
+	
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	width: 575px; 
+}
+
+ul, ul li {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+ul li {
+	padding: 7px 10px;
+	border-bottom: 1px solid #eee;
+}
+
+li.alt { background-color: #f7f7f7; }
+
+.container {
+	margin: 0 auto;
+	width: 960px;	
+}
+
+.chat-window {
+	margin: 100px auto;
+	padding: 20px;
+	width: 940px;
+	height: 400px;
+	background-color: #fff;
+	
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	
+	-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px#888;
+	box-shadow: 0 0 5px #888;
+}
+
+.chat-log-container {
+	overflow: auto;
+	float: left;
+	width: 700px;
+	height: 340px;	
+	border: 1px solid #ddd;
+	
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.header {
+	padding: 5px 10px;
+	background-color: #b6eea5;
+	border-bottom: 1px solid #ddd;
+	
+	font-size: 1.2em;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+
+.users-container {
+	overflow: auto;
+	float: right;
+	width: 220px;
+	height: 340px;	
+	border: 1px solid #ddd;
+	
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.users-container .header { background-color: #f3e3b2; }
+
+.setup-container {
+	margin: 100px auto;
+	width: 400px;
+	padding: 20px;
+	background-color: #fff;
+	
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	
+	-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px#888;
+	box-shadow: 0 0 5px #888;
+}
+
+.setup-container input {
+	margin-top: 5px;
+	width: 200px;
+}
+
+
+

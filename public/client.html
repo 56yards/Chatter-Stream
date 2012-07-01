@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<head>
+	<title>Chatter Stream</title>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="Stylesheets/stylesheet.css" media="all" />
+
+</head>
+<body>
+
+
+<script>
+	var ws;
+	
+	$(function() {
+				
+		$("#join").click( function() {
+			joinConversation($("#username").val());
+			return false;
+		})
+		
+		$("#send_message").click( function() {
+			sendMessage($("#message_box").val());
+			return false;
+		})
+	});
+	
+	function joinConversation(username) {
+		if (username == "") {
+			alert("username cannot be blank.")
+			return;
+		}
+				
+		initialiseWebSocket(username);
+	}
+	
+	function initialiseWebSocket(username) {
+		if (!("WebSocket" in window)) {
+			alert("Your browser does not support web sockets.")
+			return;
+		}
+		
+		ws = new WebSocket("ws://localhost:3001/server?username=" + escape(username));
+		ws.onopen = onOpen;
+		ws.onmessage = onMessage;
+		ws.onclose = onClose;
+	}
+	
+	function onClose() {
+		$("#chat_log").empty();
+		$("#users_log").empty();
+		$(".chat-window").hide();
+		$(".setup-container").show();
+	}
+	
+	function onOpen() {
+		$(".setup-container").hide();	
+		$(".chat-window").show();
+	} 
+	
+	function onMessage(evt) {
+		if (evt.data == "") {
+			return;		// Recieved a keep alive message from the host.
+		}
+		
+		var msg = evt.data;	
+		
+		syncUserList(evt.data);
+		
+		// hightlight the username	
+		if (msg.indexOf(":") > 0) {
+			msg = "<strong>" + msg.substring(0, msg.indexOf(":") + 1) + "</strong>" + msg.substring(msg.indexOf(":") + 1)
+		}
+		
+		var li = $("<li>").html(msg);
+		
+		if (! $("#chat_log li:last").hasClass("alt")) {
+			li.addClass("alt");
+		}
+		
+		$("#chat_log").append(li);
+	}
+	
+	function sendMessage(msg) {
+		ws.send(msg);
+	}
+	
+	function syncUserList(msg) {
+		if (msg.indexOf(": has joined the conversation") > 0) {
+			addUser(msg.substring(0, msg.indexOf(": has joined the conversation")));
+		}
+		else if (msg.indexOf(": has left the conversation") > 0) {
+			removeUser(msg.substring(0, msg.indexOf(": has left the conversation")));
+		}
+		else if (msg.indexOf("users:") == 0) {
+			$(msg.substring(msg.indexOf("users:")).split(",")).each( function() {
+				addUser(this);
+			})
+		}
+	}
+	
+	function addUser(username) {
+		$("#users_list").append($("<li>").html(username));
+	}
+	
+	function removeUser(username) {
+		$("#users_list li").each( function() {
+			if ($(this).html() == username) {
+				$(this).remove();
+			}
+		});
+	}
+	
+</script>
+
+<div class="container">
+	<div class="setup-container">
+		<label for="username">Username:</label>
+		<input id="username" type="text" />
+		<a id="join" href="#">Join</a>
+	</div>
+	
+	
+	<div class="chat-window" style="display: none">
+		<div class="chat-log-container">
+			<div class="header">Conversation</div>
+			<ul id="chat_log"></ul>
+		</div>
+		<div class="users-container">
+			<div class="header">Users</div>
+			<ul id="users_list"><ul>
+		</div>
+		<div class="clear"></div>
+		
+		<input id="message_box">&nbsp;<a id="send_message" class="button" href="#">Send</a>
+	</div>
+</div>
+</body>
+</html>

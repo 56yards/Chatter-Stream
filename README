@@ -1,8 +1,7 @@
-# Chatter Stream
+Chatter Stream
 
-Client/Server chat client
+Multi-user Client/Server chat using EventMachine.
 
-
-## Run
+To run, just type:
 
 ruby server.rb

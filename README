@@ -1,6 +1,6 @@
 Chatter Stream
 
-Multi-user Client/Server chat using EventMachine.
+Multi-User Client/Server chatting using EventMachine WebSockets
 
 To run, just type:
 

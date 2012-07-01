@@ -1,1 +1,8 @@
-Chatter Stream
+# Chatter Stream
+
+Client/Server chat client
+
+
+## Run
+
+ruby server.rb
